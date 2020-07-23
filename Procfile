@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/clojure-basic-webapp-standalone.jar
+web: java $JVM_OPTS -cp target/clojure-basic-webapp-standalone.jar clojure.main -m basic-webapp.handler
