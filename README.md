@@ -14,6 +14,10 @@ To start a web server for the application, run:
 
     lein ring server
 
+## To Do
+
+Will change this code to build a better personal version of it. Might host some static page in a very simple and  spartan style. Will try to put some reactJS in this.
+
 ## License
 
 Copyright © 2020 FIXME
