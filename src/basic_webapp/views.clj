@@ -14,11 +14,11 @@
 
 (def mydata (readfile "./hickory_material.md"))
 
-(def datamd (-> (subvec (into [] mydata) 0 (dec (count mydata)))
-                clojure.string/join
-                md-to-html-string))
-
-(comment (map md-to-html-string mydata))
+(def datamd (->> (subvec (into [] mydata) 0 (dec (count mydata)))
+                 (clojure.string/join "\n")
+                 md-to-html-string
+                 h/parse
+                 h/as-hiccup))
 
 (defn gen-page-head
   [title]
@@ -41,8 +41,7 @@
   (page/html5
    (gen-page-head "Home")
    header-links
-   (-> (h/parse datamd)
-       h/as-hiccup)
+   (first datamd)
    (comment [:h1 "Home"]
             [:p "Webapp to store and display some 2D (x, y) locations."])))
 
