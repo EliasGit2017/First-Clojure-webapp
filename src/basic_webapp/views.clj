@@ -2,7 +2,23 @@
   (:require [basic-webapp.db :as db]
             [clojure.string :as str]
             [hiccup.page :as page]
-            [ring.util.anti-forgery :as util]))
+            [ring.util.anti-forgery :as util]
+            [hickory.core :as h])
+  (:use markdown.core))
+
+(defn readfile
+  "Returns a sequence from a file f"
+  [f]
+  (with-open [rdr (clojure.java.io/reader f)]
+    (doall (line-seq rdr))))
+
+(def mydata (readfile "./hickory_material.md"))
+
+(def datamd (-> (subvec (into [] mydata) 0 (dec (count mydata)))
+                clojure.string/join
+                md-to-html-string))
+
+(comment (map md-to-html-string mydata))
 
 (defn gen-page-head
   [title]
@@ -25,8 +41,10 @@
   (page/html5
    (gen-page-head "Home")
    header-links
-   [:h1 "Home"]
-   [:p "Webapp to store and display some 2D (x, y) locations."]))
+   (-> (h/parse datamd)
+       h/as-hiccup)
+   (comment [:h1 "Home"]
+            [:p "Webapp to store and display some 2D (x, y) locations."])))
 
 (defn add-location-page
   []

@@ -1,0 +1,46 @@
+<h1>Some Bootiful code examples I keep:</h1><p>These Codes are small pieces of what I find elegant and precise examples of some of my favorites languages.</p> <pre><code class="python">#  Memoization through functions
+def memoize&#40;f&#41;:
+    memo = dict&#40;&#41;
+    def helper&#40;x&#41;:
+        if x not in memo:
+            memo&#91;x&#93; = f&#40;x&#41;
+        return memo&#91;x&#93;
+    return helper
+
+@memoize
+def fib&#40;x&#41;:
+    if x == 0:
+        return 0
+    elif x == 1:
+        return  1
+    else:
+        return fib&#40;x - 1&#41; + fib&#40;x - 2&#41;
+
+# Could have also used memoization through fib = memoize&#40;fib&#41;
+
+#%
+# Memoization through a callable class
+
+class Memoize:
+
+    def &#95;&#95;init&#95;&#95;&#40;self, fn&#41;:
+        self.fn = fn
+        self.memo = {}
+    
+    def &#95;&#95;call&#95;&#95;&#40;self, &#42;args&#41;:
+        if args not in self.memo:
+            self.memo&#91;args&#93; = self.fn&#40;&#42;args&#41;
+        return self.memo&#91;args&#93;
+
+@Memoize
+def fib&#40;x&#41;:
+    if x == 0:
+        return 0
+    elif x == 1:
+        return  1
+    else:
+        return fib&#40;x - 1&#41; + fib&#40;x - 2&#41;
+    
+print&#40;fib&#40;200&#41;&#41;
+</code></pre><h5>Quines:</h5><pre><code class="python">&#95;='&#95;=%r;print &#95;%%&#95;';print &#95;%&#95;
+</code></pre>
