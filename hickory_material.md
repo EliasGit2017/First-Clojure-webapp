@@ -1,8 +1,11 @@
-# Some Bootiful code examples I keep:
+# Some thoughts:
+<center>
+Θα προτιμούσα να πεθάνω στα πόδια μου παρά να ζήσω στα γόνατά μου  
 
-These Codes are small pieces of what I find elegant and precise examples of some of my favorites languages.
+These Codes are small pieces of what I find elegant and precise examples of some of my favorites languages.  
+ </center>
 
- 
+<img src="./resources/public/roma2.jpg" class="center">  
 
 ```python
 #  Memoization through functions
@@ -52,8 +55,8 @@ print(fib(200))
 ```
 
 ##### Quines:
-
+<center>
 ```python
 _='_=%r;print _%%_';print _%_
 ```
-
+</center>

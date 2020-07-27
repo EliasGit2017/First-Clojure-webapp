@@ -1,6 +1,6 @@
 (defproject basic-webapp "0.1.0"
   :description "Basic webapp to try and learn clojure and heroku. Just a simple app"
-  :url ""
+  :url "https://serene-refuge-26959.herokuapp.com/"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]

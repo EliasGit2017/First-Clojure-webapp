@@ -2,16 +2,21 @@
   (:require [basic-webapp.db :as db]
             [clojure.string :as str]
             [hiccup.page :as page]
+            [hiccup.core :as hic]
             [ring.util.anti-forgery :as util]
             [hickory.core :as h])
   (:use markdown.core))
 
+;;---------------------------------------------------------------------------------------
 (defn readfile
   "Returns a sequence from a file f"
   [f]
   (with-open [rdr (clojure.java.io/reader f)]
     (doall (line-seq rdr))))
 
+;; Functions designed to take markdown file(s) as input to display
+;; md files are transformed into HTML string to produce a hiccup string.
+ 
 (def mydata (readfile "./hickory_material.md"))
 
 (def datamd (->> (subvec (into [] mydata) 0 (dec (count mydata)))
@@ -19,6 +24,17 @@
                  md-to-html-string
                  h/parse
                  h/as-hiccup))
+
+;; Functions designed to take an HTML file as input and return a hiccup string
+
+(def myhtmldata (readfile "./template.html"))
+
+(def datahtml (->> myhtmldata
+                   clojure.string/join
+                   h/parse
+                   h/as-hiccup))
+
+;;---------------------------------------------------------------------------------------
 
 (defn gen-page-head
   [title]
@@ -41,9 +57,7 @@
   (page/html5
    (gen-page-head "Home")
    header-links
-   (first datamd)
-   (comment [:h1 "Home"]
-            [:p "Webapp to store and display some 2D (x, y) locations."])))
+   (first datamd)))
 
 (defn add-location-page
   []
